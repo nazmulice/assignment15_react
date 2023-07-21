@@ -1,6 +1,6 @@
-
 import { useState } from 'react';
-
+import "bootstrap/dist/css/bootstrap.min.css";
+import "../src/CSS/main.css"
 function App() {
  
   const [list, setList] = useState([]);
@@ -18,34 +18,42 @@ function App() {
 
   return (
     <div>
-      <h1>Todo List</h1>
-      <table>
-        <tbody>
-          {
-            list.length !== 0 ? (
-              list.map((element, index)=>{
+      <h1 className="display-3 text-center text-primary">Todo List</h1> <hr />
+      <section className="inputBtn">
+        <input
+          onChange={(e) => setItem(e.target.value)}
+          placeholder="Enter list Item"
+        />
+        <button onClick={addItem}>Add ITEM</button>
+      </section>
+      <section>
+        <table className="tabItem">
+          <tbody>
+            {list.length !== 0 ? (
+              list.map((element, index) => {
                 return (
                   <tr key={index}>
                     <td>{element}</td>
                     <td>
-                      <button onClick={() => {
-                        removeItem(index)
-                      }}>Remove</button>
+                      <button
+                        onClick={() => {
+                          removeItem(index);
+                        }}
+                        className="btn btn-danger"
+                      >
+                        Remove
+                      </button>
                     </td>
                   </tr>
                 );
               })
-          ): (<tr></tr>)
-          
-          }
-        </tbody>
-      </table>
-
-
-        <input onChange={(e)=> setItem(e.target.value)} placeholder="Enter Item" />
-        <button onClick={addItem}>Add</button>
-      </div>
-
+            ) : (
+              <tr></tr>
+            )}
+          </tbody>
+        </table>
+      </section>
+    </div>
   );
 }
 
