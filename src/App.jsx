@@ -8,28 +8,41 @@ function App() {
 
   const addItem = () => {
     list.push(item);
-    setItem(...item);
+    setList([...list]);
   }
 
-  const removeItem = () => {
+  const removeItem = (index) => {
     list.splice(index, 1);
-    setItem(...item);
+    setList([...list]);
   }
 
   return (
     <div>
+      <h1>Todo List</h1>
       <table>
         <tbody>
           {
-            list.length !== 0(
-              
-            )
+            list.length !== 0 ? (
+              list.map((element, index)=>{
+                return (
+                  <tr key={index}>
+                    <td>{element}</td>
+                    <td>
+                      <button onClick={() => {
+                        removeItem(index)
+                      }}>Remove</button>
+                    </td>
+                  </tr>
+                );
+              })
+          ): (<tr></tr>)
+          
           }
         </tbody>
       </table>
 
 
-        <input type="text" placeholder="Enter Item" />
+        <input onChange={(e)=> setItem(e.target.value)} placeholder="Enter Item" />
         <button onClick={addItem}>Add</button>
       </div>
 
